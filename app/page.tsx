@@ -11,10 +11,18 @@ export default function Page() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
       <main>
-        <Hero />
-        <Sectors />
-        <Capabilities />
-        <EquipmentDashboard />
+        {/* Targets "About Mishra" right at the core introduction */}
+        <div id="about">
+          <Hero />
+          <Sectors />
+        </div>
+
+        {/* Targets the "Capabilities" matrix column links */}
+        <div id="capabilities">
+          <Capabilities />
+          <EquipmentDashboard />
+        </div>
+
         <TenderForm />
       </main>
       <SiteFooter />
