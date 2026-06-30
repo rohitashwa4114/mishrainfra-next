@@ -63,10 +63,9 @@ export function SiteFooter() {
 
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-8 text-xs text-muted-foreground sm:flex-row">
           <p>&copy; {new Date().getFullYear()} Mishra Capital Infra Solutions LLP. All rights reserved.</p>
-          <div className="flex gap-6">
-            <a href="#" className="transition-colors hover:text-foreground">Privacy Policy</a>
-            <a href="#" className="transition-colors hover:text-foreground">Terms of Service</a>
-            <span className="cursor-default select-all">CIN: U45200UP2026PTC000000</span>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center sm:justify-end text-[11px] font-mono opacity-80">
+            <span className="cursor-default select-all">LLPIN: ACW-9180</span>
+            <span className="cursor-default select-all">UDYAM: UDYAM-UP-50-0269779</span>
           </div>
         </div>
       </div>
