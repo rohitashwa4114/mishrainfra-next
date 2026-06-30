@@ -66,7 +66,7 @@ export function SiteFooter() {
           <div className="flex gap-6">
             <a href="#" className="transition-colors hover:text-foreground">Privacy Policy</a>
             <a href="#" className="transition-colors hover:text-foreground">Terms of Service</a>
-            <a href="#" className="transition-colors hover:text-foreground">CIN: U45200UP2026PTC000000</a>
+            <span className="cursor-default select-all">CIN: U45200UP2026PTC000000</span>
           </div>
         </div>
       </div>
