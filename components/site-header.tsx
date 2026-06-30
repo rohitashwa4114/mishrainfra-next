@@ -33,9 +33,9 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-        {/* Exact brand lockup, top-left */}
+        {/* Scaled brand lockup for prominent visibility */}
         <a href="#top" className="group flex items-center" aria-label="Mishra Capital Infra Solutions LLP — home">
-          <BrandLogo size="sm" className="transition-transform duration-500 group-hover:scale-[1.03]" />
+          <BrandLogo size="md" className="transition-transform duration-500 group-hover:scale-[1.02]" />
         </a>
 
         <nav className="hidden items-center gap-8 lg:flex">
