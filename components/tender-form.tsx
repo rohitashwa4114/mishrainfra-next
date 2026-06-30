@@ -1,8 +1,9 @@
 "use client"
 
-import { useState, type FormEvent } from "react"
+import { useState } from "react"
 import { CheckCircle2, ShieldCheck, FileText, Clock, ArrowRight } from "lucide-react"
 import { Reveal } from "@/components/reveal"
+import { sendTenderEmail } from "@/app/actions" // Adjust this import relative path to match your layout
 
 const sectors = [
   "Power & Energy",
@@ -33,10 +34,23 @@ const highlights = [
 
 export function TenderForm() {
   const [submitted, setSubmitted] = useState(false)
+  const [isSending, setIsSending] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setSubmitted(true)
+    setIsSending(true)
+    setError(null)
+    
+    const formData = new FormData(e.currentTarget)
+    const result = await sendTenderEmail(formData)
+    
+    setIsSending(false)
+    if (result.success) {
+      setSubmitted(true)
+    } else {
+      setError("Something went wrong routing your message. Please try again or contact us directly.")
+    }
   }
 
   return (
@@ -97,31 +111,31 @@ export function TenderForm() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <Field label="Department / Organization" required>
-                    <input required type="text" placeholder="e.g. State Power Utility" className={inputCls} />
+                    <input required name="department" type="text" placeholder="e.g. State Power Utility" className={inputCls} />
                   </Field>
                   <Field label="Contact Person" required>
-                    <input required type="text" placeholder="Full name" className={inputCls} />
+                    <input required name="contactName" type="text" placeholder="Full name" className={inputCls} />
                   </Field>
                 </div>
 
                 <div className="grid gap-5 sm:grid-cols-2">
                   <Field label="Official Email" required>
-                    <input required type="email" placeholder="name@gov.in" className={inputCls} />
+                    <input required name="email" type="email" placeholder="name@gov.in" className={inputCls} />
                   </Field>
                   <Field label="Phone" required>
-                    <input required type="tel" placeholder="+91 00000 00000" className={inputCls} />
+                    <input required name="phone" type="tel" placeholder="+91 00000 00000" className={inputCls} />
                   </Field>
                 </div>
 
                 <div className="grid gap-5 sm:grid-cols-2">
                   <Field label="Sector" required>
-                    <select required defaultValue="" className={inputCls}>
+                    <select required name="sector" defaultValue="" className={inputCls}>
                       <option value="" disabled>Select sector</option>
                       {sectors.map((s) => <option key={s} value={s}>{s}</option>)}
                     </select>
                   </Field>
                   <Field label="Project Type" required>
-                    <select required defaultValue="" className={inputCls}>
+                    <select required name="projectType" defaultValue="" className={inputCls}>
                       <option value="" disabled>Select type</option>
                       {projectTypes.map((s) => <option key={s} value={s}>{s}</option>)}
                     </select>
@@ -130,35 +144,39 @@ export function TenderForm() {
 
                 <div className="grid gap-5 sm:grid-cols-2">
                   <Field label="Estimated Budget" required>
-                    <select required defaultValue="" className={inputCls}>
+                    <select required name="budget" defaultValue="" className={inputCls}>
                       <option value="" disabled>Select range</option>
                       {budgets.map((s) => <option key={s} value={s}>{s}</option>)}
                     </select>
                   </Field>
                   <Field label="Tender Reference No.">
-                    <input type="text" placeholder="Optional" className={inputCls} />
+                    <input name="refNo" type="text" placeholder="Optional" className={inputCls} />
                   </Field>
                 </div>
 
                 <Field label="State / Location" required>
-                  <input required type="text" placeholder="e.g. Rajasthan, India" className={inputCls} />
+                  <input required name="location" type="text" placeholder="e.g. Rajasthan, India" className={inputCls} />
                 </Field>
 
                 <Field label="Scope & Requirements" required>
                   <textarea
                     required
+                    name="scope"
                     rows={4}
                     placeholder="Briefly describe the tender scope, timelines and key deliverables..."
                     className={`${inputCls} resize-none`}
                   />
                 </Field>
 
+                {error && <p className="text-xs text-red-500 font-medium">{error}</p>}
+
                 <button
                   type="submit"
-                  className="group inline-flex w-full items-center justify-center gap-2 rounded-sm bg-gold px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-gold/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-gold/30"
+                  disabled={isSending}
+                  className="group inline-flex w-full items-center justify-center gap-2 rounded-sm bg-gold px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-gold/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-gold/30 disabled:opacity-70 disabled:pointer-events-none"
                 >
-                  Submit Tender Brief
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  {isSending ? "Routing Submission..." : "Submit Tender Brief"}
+                  {!isSending && <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />}
                 </button>
                 <p className="text-center text-xs text-muted-foreground">
                   Encrypted submission. Used solely for tender evaluation purposes.
@@ -187,7 +205,7 @@ function Field({
   return (
     <label className="block">
       <span className="mb-1.5 block text-xs font-medium uppercase tracking-[0.1em] text-muted-foreground">
-        {label} {required && <span className="text-crimson">*</span>}
+        {label} {required && <span className="text-red-500">*</span>}
       </span>
       {children}
     </label>
