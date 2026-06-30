@@ -1,83 +1,72 @@
-import Link from "next/link"
+import { MapPin, Mail, Phone } from "lucide-react"
+import { BrandLogo } from "@/components/brand-logo"
+
+const columns = [
+  {
+    title: "Capabilities",
+    links: ["EPC & Engineering", "Renewable Energy", "Power Transmission", "AI Data Centers", "Water & Sanitation"],
+  },
+  {
+    title: "Company",
+    links: ["About Mishra", "Leadership", "Project Portfolio", "Sustainability", "Careers"],
+  },
+  {
+    title: "Resources",
+    links: ["Tender Portal", "Compliance & Certifications", "Press & Media", "Investor Relations", "Contact"],
+  },
+]
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-amber-500/15 bg-[#070709] text-slate-400">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          
-          {/* Left Column: Brand & Contact Info */}
-          <div className="space-y-8 xl:col-span-1">
-            <div className="flex items-center gap-2">
-              <span className="font-serif text-lg font-bold tracking-wider text-white">
-                MISHRA <span className="text-amber-500 font-sans text-xs uppercase tracking-widest block font-medium">Capital Infra</span>
-              </span>
-            </div>
-            
-            {/* Corporate Headquarters & Contact Grid */}
-            <div className="space-y-4 text-sm font-light">
-              <div>
-                <h4 className="text-xs uppercase tracking-widest font-semibold text-amber-500/80 mb-1">Corporate Presence</h4>
-                <p className="text-white">Lucknow,</p>
-                <p>Uttar Pradesh, India</p>
-              </div>
-              
-              <div className="pt-2">
-                <h4 className="text-xs uppercase tracking-widest font-semibold text-amber-500/80 mb-1">Procurement Desk</h4>
-                <p className="text-white hover:text-amber-400 transition">
-                  <a href="mailto:contact@mishrainfra.in">contact@mishrainfra.in</a>
-                </p>
-              </div>
-
-              <div className="pt-2">
-                <h4 className="text-xs uppercase tracking-widest font-semibold text-amber-500/80 mb-1">Direct Line</h4>
-                <p className="text-white hover:text-amber-400 transition">
-                  <a href="tel:+919194294114">+91-9194294114</a>
-                </p>
-              </div>
-            </div>
+    <footer className="border-t border-border/60 bg-secondary/30">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div>
+            <BrandLogo size="md" className="items-start text-left" />
+            <p className="mt-6 max-w-xs text-sm leading-relaxed text-muted-foreground">
+              Engineering, financing and operating nation-scale infrastructure for government and
+              enterprise partners across power, renewables, transmission and digital assets.
+            </p>
+            <ul className="mt-6 space-y-2.5 text-sm text-muted-foreground">
+              <li className="flex items-center gap-2.5">
+                <MapPin className="h-4 w-4 text-gold flex-shrink-0" /> Lucknow, Uttar Pradesh, India
+              </li>
+              <li className="flex items-center gap-2.5">
+                <Mail className="h-4 w-4 text-gold flex-shrink-0" /> 
+                <a href="mailto:contact@mishrainfra.in" className="hover:text-foreground transition-colors">contact@mishrainfra.in</a>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <Phone className="h-4 w-4 text-gold flex-shrink-0" /> 
+                <a href="tel:+919194294114" className="hover:text-foreground transition-colors">+91-9194294114</a>
+              </li>
+            </ul>
           </div>
 
-          {/* Right Columns: Dynamic Nav Links */}
-          <div className="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-amber-500">Capabilities</h3>
-                <ul role="list" className="mt-4 space-y-2 text-sm">
-                  <li><a href="#capabilities" className="hover:text-white transition">EPC & Engineering</a></li>
-                  <li><a href="#capabilities" className="hover:text-white transition">Renewable Energy</a></li>
-                  <li><a href="#capabilities" className="hover:text-white transition">Power Transmission</a></li>
-                  <li><a href="#capabilities" className="hover:text-white transition">AI Data Centers</a></li>
-                </ul>
-              </div>
-              <div className="mt-12 md:mt-0">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-amber-500">Company</h3>
-                <ul role="list" className="mt-4 space-y-2 text-sm">
-                  <li><a href="#top" className="hover:text-white transition">About Mishra</a></li>
-                  <li><a href="#top" className="hover:text-white transition">Leadership</a></li>
-                  <li><a href="#top" className="hover:text-white transition">Sustainability</a></li>
-                </ul>
-              </div>
+          {columns.map((col) => (
+            <div key={col.title}>
+              <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{col.title}</h3>
+              <ul className="mt-5 space-y-3">
+                {col.links.map((link) => (
+                  <li key={link}>
+                    <a
+                      href="#"
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="md:grid md:grid-cols-1">
-              <div>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-amber-500">Resources</h3>
-                <ul role="list" className="mt-4 space-y-2 text-sm">
-                  <li><a href="#tenders" className="hover:text-white transition">Tender Portal</a></li>
-                  <li><a href="#tenders" className="hover:text-white transition">Compliance</a></li>
-                  <li><a href="#tenders" className="hover:text-white transition">Partner Registration</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
+          ))}
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-8 text-xs text-muted-foreground sm:flex-row">
           <p>&copy; {new Date().getFullYear()} Mishra Capital Infra Solutions LLP. All rights reserved.</p>
-          <div className="flex gap-6 font-mono opacity-60">
-            <span>CIN: U45200UP2026PTC000000</span>
+          <div className="flex gap-6">
+            <a href="#" className="transition-colors hover:text-foreground">Privacy Policy</a>
+            <a href="#" className="transition-colors hover:text-foreground">Terms of Service</a>
+            <a href="#" className="transition-colors hover:text-foreground">CIN: U45200UP2026PTC000000</a>
           </div>
         </div>
       </div>
