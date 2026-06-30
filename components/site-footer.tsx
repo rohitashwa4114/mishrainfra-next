@@ -168,7 +168,11 @@ export function SiteFooter() {
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 text-gold flex-shrink-0" /> 
-                <a href="tel:+919194294114" className="hover:text-foreground transition-colors">+91-9194294114</a>
+                <a href="tel:+919194294114" className="hover:text-foreground transition-colors">+91-9194294114 (Mobile)</a>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <Phone className="h-4 w-4 text-gold flex-shrink-0" /> 
+                <a href="tel:+915223586330" className="hover:text-foreground transition-colors">+91-522-3586330 (Landline)</a>
               </li>
             </ul>
           </div>
