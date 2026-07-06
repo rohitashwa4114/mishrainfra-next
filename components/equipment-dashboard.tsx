@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useMemo } from "react"
-import { Search, ShieldCheck, Cpu, Layers, HardHat, Bolt, Construction, Hammer, Paintbrush, Home, Milestones } from "lucide-react"
+import { Search, ShieldCheck, Cpu, Layers, HardHat, Bolt, Construction, Hammer, Paintbrush, Home, Milestone } from "lucide-react"
 
 // Fully mapped 9 official NIC Classifications from your certificate
 const CATEGORIES = [
@@ -14,7 +14,7 @@ const CATEGORIES = [
   { id: "nic-46633", label: "Hardware & Fittings", nic: "NIC 46633", icon: Hammer },
   { id: "nic-46634", label: "Paints & Varnishes", nic: "NIC 46634", icon: Paintbrush },
   { id: "nic-41001", label: "Building Construction", nic: "NIC 41001", icon: Home },
-  { id: "nic-42101", label: "Civil Infrastructure & Roads", nic: "NIC 42101", icon: Milestones },
+  { id: "nic-42101", label: "Civil Infrastructure & Roads", nic: "NIC 42101", icon: Milestone },
 ]
 
 const CATALOG_ITEMS = [
@@ -92,7 +92,7 @@ export function EquipmentDashboard() {
   const [searchQuery, setSearchQuery] = useState("")
   const [activeMode, setActiveMode] = useState("All")
 
-  // Filter catalog rows on the fly 
+  // Filter catalog rows on the fly
   const filteredItems = useMemo(() => {
     return CATALOG_ITEMS.filter((item) => {
       const matchesCategory = activeCategory === "all" || item.category === activeCategory
@@ -106,7 +106,7 @@ export function EquipmentDashboard() {
   const stats = useMemo(() => {
     return {
       totalLines: CATALOG_ITEMS.length,
-      categoriesCount: CATEGORIES.length - 1, 
+      categoriesCount: CATEGORIES.length - 1,
       readyToQuote: CATALOG_ITEMS.filter(i => i.mode === "In Catalog").length
     }
   }, [])
