@@ -1,218 +1,95 @@
 "use client"
 
-import { useState } from "react"
-import { CheckCircle2, ShieldCheck, FileText, Clock, ArrowRight } from "lucide-react"
-import { Reveal } from "@/components/reveal"
-import { sendTenderEmail } from "@/app/actions"
+import { FileSpreadsheet, ShieldCheck, Truck, ClipboardCheck } from "lucide-react"
 
-const sectors = [
-  "Power & Energy",
-  "Renewable Energy",
-  "Transmission & Grid",
-  "Data Center",
-  "Water & Sanitation",
-  "Roads & Highways",
-  "Ports & Logistics",
-  "Other",
-]
-
-const projectTypes = [
-  "Equipment Supply",
-  "Component Procurement",
-  "GeM Order Fulfilment",
-  "Spares & Consumables",
-  "Rate Contract Supply",
-]
-
-const budgets = ["Under ₹5 Lakh", "₹5 – 25 Lakh", "₹25 Lakh – 1 Cr", "₹1 – 5 Cr", "Above ₹5 Cr"]
-
-const highlights = [
-  { icon: ShieldCheck, title: "Udyam-registered MSME", desc: "A verified micro-enterprise eligible for MSME procurement benefits and exemptions." },
-  { icon: FileText, title: "GeM-ready quotations", desc: "We respond with quotes, specifications and compliance documents for GeM and tenders." },
-  { icon: Clock, title: "Prompt, hands-on response", desc: "Enquiries are handled directly by our agile sourcing team — no layers, no delays." },
+const WORKFLOW_STEPS = [
+  {
+    phase: "Phase 01",
+    title: "Bid Evaluation & BOQ Analysis",
+    description:
+      "Our commercial estimating desk parses your technical drawings, material formulations, and strict Bill of Quantities (BOQ). We run complete compliance matching against state guidelines and tender parameters.",
+    icon: FileSpreadsheet,
+  },
+  {
+    phase: "Phase 02",
+    title: "Tier-1 OEM Sourcing Loop",
+    description:
+      "We engage our pre-vetted network of authorized industrial manufacturers and global OEMs. By pulling direct, high-volume price quotes, we lock down highly competitive commercial structuring for your project.",
+    icon: ShieldCheck,
+  },
+  {
+    phase: "Phase 03",
+    title: "Logistics & Fleet Coordination",
+    description:
+      "Our supply chain managers coordinate heavy freight routing, strategic dispatch, and multi-point transport networks to eliminate field delays, ensuring all components arrive strictly on schedule.",
+    icon: Truck,
+  },
+  {
+    phase: "Phase 04",
+    title: "On-Site Delivery & Handover",
+    description:
+      "Materials undergo final technical inspection upon site arrival. We execute seamless corporate handover logs and clear compliance documentation to finalize regulatory verification loops.",
+    icon: ClipboardCheck,
+  },
 ]
 
 export function TenderForm() {
-  const [submitted, setSubmitted] = useState(false)
-  const [isSending, setIsSending] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setIsSending(true)
-    setError(null)
-    
-    const formData = new FormData(e.currentTarget)
-    const result = await sendTenderEmail(formData)
-    
-    setIsSending(false)
-    if (result.success) {
-      setSubmitted(true)
-    } else {
-      setError("Something went wrong routing your message. Please try again or contact us directly.")
-    }
-  }
-
   return (
-    <section id="tenders" className="relative border-t border-border/60 py-16 sm:py-32 overflow-hidden">
-      <div className="grid-texture pointer-events-none absolute inset-0 opacity-20 sm:opacity-30" />
-      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
+    <section id="tenders" className="border-t border-border/40 bg-background py-20 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
-        {/* Left intro: Stays crisp and unstacked on mobile */}
-        <Reveal>
-          <div className="flex flex-col justify-center">
-            <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-gold">
-              <span className="h-px w-8 sm:w-10 bg-gold" />
-              Government Tenders
-            </p>
-            <h2 className="mt-4 text-balance font-serif text-2xl font-bold leading-tight text-foreground sm:text-5xl">
-              Invite us to your next tender
-            </h2>
-            <p className="mt-3 max-w-md text-pretty text-sm sm:text-lg text-muted-foreground">
-              Submit your tender brief and our public-sector bid desk will respond with eligibility,
-              technical capability statements and commercial structuring options.
-            </p>
+        {/* Section Heading */}
+        <div className="max-w-3xl">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold block mb-2">
+            Operational Blueprint
+          </span>
+          <h2 className="font-serif text-3xl font-bold tracking-tight text-foreground sm:text-4xl uppercase">
+            Our Strategic Execution Workflow
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+            From the initial submission of technical criteria to physical project handover, we implement 
+            a rigid, structured procurement pipeline designed for high-stakes infrastructure delivery.
+          </p>
+        </div>
 
-            {/* Mobile Touch Optimized Highlights Grid */}
-            <div className="mt-8 grid gap-4 grid-cols-1 sm:grid-cols-1">
-              {highlights.map((h) => (
-                <div key={h.title} className="flex gap-4 p-3.5 rounded-sm bg-secondary/10 border border-border/30 backdrop-blur-xs">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-gold/20 bg-gold/5 text-gold">
-                    <h.icon className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm sm:text-base font-semibold text-foreground">{h.title}</p>
-                    <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 leading-normal">{h.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Reveal>
+        {/* Timeline Grid Layout */}
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 relative">
+          
+          {/* Subtle connecting track line behind cards on desktop */}
+          <div className="hidden lg:block absolute top-[2.25rem] left-8 right-8 h-px bg-gradient-to-r from-gold/30 via-border/40 to-transparent z-0" />
 
-        {/* Right form: Enhanced input touch states */}
-        <Reveal delay={120}>
-          <div className="rounded-lg border border-border/70 bg-card/40 sm:bg-card/80 p-5 backdrop-blur-md sm:p-8 shadow-2xl shadow-background/50">
-            {submitted ? (
-              <div className="flex min-h-[400px] sm:min-h-[480px] flex-col items-center justify-center text-center p-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 bg-gold/10 text-gold animate-scaleIn">
-                  <CheckCircle2 className="h-6 w-6" />
+          {WORKFLOW_STEPS.map((step, idx) => {
+            const Icon = step.icon
+            return (
+              <div 
+                key={idx} 
+                className="relative bg-secondary/10 border border-border/40 rounded-sm p-6 flex flex-col justify-between hover:border-gold/40 hover:bg-secondary/20 transition-all group z-10"
+              >
+                <div>
+                  {/* Phase Counter and Icon */}
+                  <div className="flex items-center justify-between gap-4 mb-6">
+                    <span className="font-mono text-[10px] font-bold tracking-widest text-gold bg-gold/5 border border-gold/20 px-2 py-0.5 rounded-sm uppercase">
+                      {step.phase}
+                    </span>
+                    <div className="h-9 w-9 rounded-full border border-border/60 bg-background flex items-center justify-center text-muted-foreground group-hover:text-gold group-hover:border-gold/30 transition-colors shadow-sm">
+                      <Icon className="h-4 w-4" />
+                    </div>
+                  </div>
+
+                  {/* Text Details */}
+                  <h3 className="text-sm font-semibold tracking-wide text-foreground group-hover:text-gold transition-colors">
+                    {step.title}
+                  </h3>
+                  <p className="mt-3 text-xs leading-relaxed text-muted-foreground group-hover:text-muted-foreground/90 transition-colors">
+                    {step.description}
+                  </p>
                 </div>
-                <h3 className="mt-5 font-serif text-xl sm:text-2xl font-bold text-foreground">Tender brief received</h3>
-                <p className="mt-2.5 max-w-sm text-xs sm:text-sm text-muted-foreground">
-                  Thank you. Our tender management cell will acknowledge your submission within 72 hours
-                  with a dedicated bid reference.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setSubmitted(false)}
-                  className="mt-6 inline-flex items-center gap-2 rounded-sm border border-border px-5 py-2.5 text-xs sm:text-sm font-semibold text-foreground transition-all active:scale-95 active:bg-secondary"
-                >
-                  Submit another tender
-                </button>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
-                <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
-                  <Field label="Department / Organization" required>
-                    <input required name="department" type="text" placeholder="e.g. State Power Utility" className={inputCls} />
-                  </Field>
-                  <Field label="Contact Person" required>
-                    <input required name="contactName" type="text" placeholder="Full name" className={inputCls} />
-                  </Field>
-                </div>
+            )
+          })}
+        </div>
 
-                <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
-                  <Field label="Official Email" required>
-                    <input required name="email" type="email" placeholder="name@gov.in" className={inputCls} />
-                  </Field>
-                  <Field label="Phone" required>
-                    <input required name="phone" type="tel" placeholder="+91 00000 00000" className={inputCls} />
-                  </Field>
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
-                  <Field label="Sector" required>
-                    <select required name="sector" defaultValue="" className={inputCls}>
-                      <option value="" disabled>Select sector</option>
-                      {sectors.map((s) => <option key={s} value={s}>{s}</option>)}
-                    </select>
-                  </Field>
-                  <Field label="Project Type" required>
-                    <select required name="projectType" defaultValue="" className={inputCls}>
-                      <option value="" disabled>Select type</option>
-                      {projectTypes.map((s) => <option key={s} value={s}>{s}</option>)}
-                    </select>
-                  </Field>
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
-                  <Field label="Estimated Budget" required>
-                    <select required name="budget" defaultValue="" className={inputCls}>
-                      <option value="" disabled>Select range</option>
-                      {budgets.map((s) => <option key={s} value={s}>{s}</option>)}
-                    </select>
-                  </Field>
-                  <Field label="Tender Reference No.">
-                    <input name="refNo" type="text" placeholder="Optional" className={inputCls} />
-                  </Field>
-                </div>
-
-                <Field label="State / Location" required>
-                  <input required name="location" type="text" placeholder="e.g. Rajasthan, India" className={inputCls} />
-                </Field>
-
-                <Field label="Scope & Requirements" required>
-                  <textarea
-                    required
-                    name="scope"
-                    rows={4}
-                    placeholder="Briefly describe the tender scope, timelines and key deliverables..."
-                    className={`${inputCls} resize-none`}
-                  />
-                </Field>
-
-                {error && <p className="text-xs text-red-500 font-medium">{error}</p>}
-
-                <button
-                  type="submit"
-                  disabled={isSending}
-                  className="group inline-flex w-full items-center justify-center gap-2 rounded-sm bg-gold px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-gold/10 transition-all duration-200 active:scale-[0.99] active:brightness-95 disabled:opacity-70 disabled:pointer-events-none"
-                >
-                  {isSending ? "Routing Submission..." : "Submit Tender Brief"}
-                  {!isSending && <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />}
-                </button>
-                <p className="text-center text-[10px] sm:text-xs text-muted-foreground/80">
-                  Encrypted submission. Used solely for tender evaluation purposes.
-                </p>
-              </form>
-            )}
-          </div>
-        </Reveal>
       </div>
     </section>
-  )
-}
-
-// Added safe font size (text-base on mobile prevents iOS from zooming in automatically on click)
-const inputCls =
-  "w-full rounded-sm border border-border bg-background/50 px-3.5 py-3 sm:py-2.5 text-base sm:text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-all focus:border-gold/60 focus:bg-background active:bg-background [&>option]:bg-card"
-
-function Field({
-  label,
-  required,
-  children,
-}: {
-  label: string
-  required?: boolean
-  children: React.ReactNode
-}) {
-  return (
-    <label className="block">
-      <span className="mb-1.5 block text-[10px] sm:text-xs font-medium uppercase tracking-[0.1em] text-muted-foreground">
-        {label} {required && <span className="text-red-500">*</span>}
-      </span>
-      {children}
-    </label>
   )
 }
