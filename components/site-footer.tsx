@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { MapPin, Mail, Phone, X, Award, Shield, Landmark, User, Briefcase, Leaf } from "lucide-react"
+import { MapPin, Mail, Phone, X, Award, Shield, Landmark, User, Briefcase, Leaf, FileText } from "lucide-react"
 import { BrandLogo } from "@/components/brand-logo"
 
 export function SiteFooter() {
@@ -38,6 +38,16 @@ export function SiteFooter() {
           <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
             <p>We maintain full corporate and fiscal authorization under the Ministry of Corporate Affairs and MSME sectors.</p>
             <div className="space-y-3 mt-4">
+              <div className="flex gap-3 items-start p-3 bg-secondary/20 border border-border rounded-sm">
+                <FileText className="h-5 w-5 text-gold shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="text-foreground font-semibold text-xs uppercase tracking-wider font-mono">Tax Registration (GSTIN)</h4>
+                  <p className="text-sm mt-0.5 select-all font-mono text-foreground/90">09ACHFM1160A1ZO</p>
+                  <p className="text-xs text-muted-foreground/80 mt-1 leading-normal">
+                    Fully verified state entity under Commercial Tax Department, Uttar Pradesh. Authorizes valid B2B tax invocations.
+                  </p>
+                </div>
+              </div>
               <div className="flex gap-3 items-start p-3 bg-secondary/20 border border-border rounded-sm">
                 <Landmark className="h-5 w-5 text-gold shrink-0 mt-0.5" />
                 <div>
@@ -209,6 +219,7 @@ export function SiteFooter() {
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-8 text-xs text-muted-foreground sm:flex-row">
           <p>&copy; {new Date().getFullYear()} Mishra Capital Infra Solutions LLP. All rights reserved.</p>
           <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center sm:justify-end text-[11px] font-mono opacity-80">
+            <span className="cursor-default select-all">GSTIN: 09ACHFM1160A1ZO</span>
             <span className="cursor-default select-all">LLPIN: ACW-9180</span>
             <span className="cursor-default select-all">UDYAM: UDYAM-UP-50-0269779</span>
           </div>
