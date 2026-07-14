@@ -20,24 +20,23 @@ export function FounderSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
           
-          {/* Left Block: Corporate Portrait Card */}
+          {/* Left Block: Corporate Portrait Card (Updated for Landscape/Rectangle Image) */}
           <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
-            <div className="relative mb-6">
-              {/* Studio Portrait Frame */}
-              <div className="h-56 w-56 sm:h-64 sm:w-64 rounded-sm border border-gold/40 bg-background flex items-center justify-center p-2 shadow-2xl shadow-black/60 overflow-hidden">
+            <div className="relative mb-6 w-full max-w-sm sm:max-w-md">
+              {/* Studio Portrait Frame optimized for 896x500 aspect ratio */}
+              <div className="aspect-[16/9] w-full rounded-sm border border-gold/40 bg-background flex items-center justify-center p-2 shadow-2xl shadow-black/60 overflow-hidden">
                 <div className="relative h-full w-full bg-secondary/30 border border-border/60 flex flex-col items-center justify-center rounded-sm group">
-                  {/* Active Image Asset viewport */}
                   <Image 
                     src="/rohitashwa.jpg" 
                     alt="Rohitashwa Mishra - Designated Partner"
                     fill
-                    sizes="(max-width: 768px) 224px, 256px"
-                    className="object-cover object-top filter grayscale contrast-[1.1] transition-all duration-500 group-hover:grayscale-0"
-                    fallback={<span className="font-serif text-3xl font-bold text-gold/40">RM</span>}
+                    sizes="(max-width: 768px) 100vw, 400px"
+                    className="object-cover object-center filter grayscale contrast-[1.05] transition-all duration-500 group-hover:grayscale-0"
+                    priority
                   />
                 </div>
               </div>
-              <Quote className="absolute -bottom-3 -right-3 h-10 w-10 text-gold/10 transform rotate-180 hidden sm:block" />
+              <Quote className="absolute -bottom-4 -right-3 h-10 w-10 text-gold/10 transform rotate-180 hidden sm:block" />
             </div>
 
             <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
