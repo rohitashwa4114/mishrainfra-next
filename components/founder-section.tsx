@@ -20,18 +20,18 @@ export function FounderSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
           
-          {/* Left Block: Corporate Portrait Card (Updated for Landscape/Rectangle Image) */}
+          {/* Left Block: Corporate Portrait Card */}
           <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
             <div className="relative mb-6 w-full max-w-sm sm:max-w-md">
               {/* Studio Portrait Frame optimized for 896x500 aspect ratio */}
               <div className="aspect-[16/9] w-full rounded-sm border border-gold/40 bg-background flex items-center justify-center p-2 shadow-2xl shadow-black/60 overflow-hidden">
-                <div className="relative h-full w-full bg-secondary/30 border border-border/60 flex flex-col items-center justify-center rounded-sm group">
+                <div className="relative h-full w-full bg-secondary/30 border border-border/60 flex flex-col items-center justify-center rounded-sm">
                   <Image 
                     src="/rohitashwa.jpg" 
                     alt="Rohitashwa Mishra - Designated Partner"
                     fill
                     sizes="(max-width: 768px) 100vw, 400px"
-                    className="object-cover object-center filter grayscale contrast-[1.05] transition-all duration-500 group-hover:grayscale-0"
+                    className="object-cover object-center contrast-[1.05] transition-all duration-500"
                     priority
                   />
                 </div>
