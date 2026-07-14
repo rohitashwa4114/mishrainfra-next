@@ -4,6 +4,7 @@ import { Sectors } from "@/components/sectors"
 import { Capabilities } from "@/components/capabilities"
 import { EquipmentDashboard } from "@/components/equipment-dashboard"
 import { TenderForm } from "@/components/tender-form"
+import { FounderSection } from "@/components/founder-section"
 import { SiteFooter } from "@/components/site-footer"
 
 export default function Page() {
@@ -23,7 +24,11 @@ export default function Page() {
           <EquipmentDashboard />
         </div>
 
+        {/* Strategic Execution Workflow Timeline */}
         <TenderForm />
+
+        {/* Brand New Corporate Founder Profile Section */}
+        <FounderSection />
       </main>
       <SiteFooter />
     </div>
