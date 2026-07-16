@@ -1,7 +1,23 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { X, Upload, FileText, Send, Building2, User, Mail, Briefcase } from "lucide-react"
+import { X, Upload, FileText, Send, Building2, User, Mail, HelpCircle } from "lucide-react"
+
+const EXPANDED_NIC_CODES = [
+  { code: "42101", label: "Turnkey Civil/Road Build (NIC 41001/42101)" },
+  { code: "42102", label: "Bridges, Flyovers & Tunnels (NIC 42102)" },
+  { code: "42201", label: "Power Transmission Lines & Grids (NIC 42201)" },
+  { code: "42202", label: "Telecommunication & Optic Fiber (NIC 42202)" },
+  { code: "42204", label: "Water Infrastructure & Pipelines (NIC 42204)" },
+  { code: "42901", label: "Power Generation Plants (NIC 42901)" },
+  { code: "42902", label: "Heavy Industrial Plant Facilities (NIC 42902)" },
+  { code: "43210", label: "Electrical Systems & Substation Wiring (NIC 43210)" },
+  { code: "43220", label: "Industrial HVAC & Plumbing Setup (NIC 43220)" },
+  { code: "46620", label: "Wholesale Metals & Structural Ores (NIC 46620)" },
+  { code: "46631", label: "Wholesale Construction Materials (NIC 46632)" },
+  { code: "46692", label: "Electrical Machinery & Transformers (NIC 46593/46692)" },
+  { code: "71100", label: "Core Technical Engineering Consultancy (NIC 71100)" }
+]
 
 interface TenderModalProps {
   isOpen: boolean
@@ -13,7 +29,7 @@ export function TenderModal({ isOpen, onClose }: TenderModalProps) {
     companyName: "",
     contactPerson: "",
     email: "",
-    scope: "Electrical Machinery (NIC 46593)",
+    scope: "46692", // Default tracking set to Electrical Machinery category code
     timeline: "Immediate (< 30 days)",
     additionalDetails: ""
   })
@@ -43,7 +59,7 @@ export function TenderModal({ isOpen, onClose }: TenderModalProps) {
         companyName: "",
         contactPerson: "",
         email: "",
-        scope: "Electrical Machinery (NIC 46593)",
+        scope: "46692",
         timeline: "Immediate (< 30 days)",
         additionalDetails: ""
       })
@@ -145,17 +161,20 @@ export function TenderModal({ isOpen, onClose }: TenderModalProps) {
             {/* Scope Selection Dropdown matching core setup */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-semibold tracking-wider text-gold uppercase mb-1.5">Primary Procurement Scope</label>
+                <label className="block text-[11px] font-semibold tracking-wider text-gold uppercase mb-1.5 flex items-center gap-1">
+                  Primary Procurement Scope
+                  <HelpCircle className="h-3 w-3 text-muted-foreground/40 cursor-help" title="Select core industrial segment code" />
+                </label>
                 <select
                   value={formData.scope}
                   onChange={(e) => setFormData({ ...formData, scope: e.target.value })}
-                  className="w-full rounded-sm border border-border/60 bg-secondary/20 py-2.5 px-3 text-xs text-foreground focus:border-gold/60 focus:outline-none focus:ring-1 focus:ring-gold/40 cursor-pointer"
+                  className="w-full rounded-sm border border-border/60 bg-secondary/20 py-2.5 px-3 text-xs text-foreground focus:border-gold/60 focus:outline-none focus:ring-1 focus:ring-gold/40 cursor-pointer text-left"
                 >
-                  <option className="bg-card">Electrical Machinery (NIC 46593)</option>
-                  <option className="bg-card">Metals & Ores (NIC 46620)</option>
-                  <option className="bg-card">Construction Materials (NIC 46632)</option>
-                  <option className="bg-card">Civil Machinery Assets (NIC 46594)</option>
-                  <option className="bg-card">Turnkey Civil/Road Build (NIC 41001/42101)</option>
+                  {EXPANDED_NIC_CODES.map((item) => (
+                    <option key={item.code} value={item.code} className="bg-card text-foreground">
+                      {item.label}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div>
@@ -166,8 +185,8 @@ export function TenderModal({ isOpen, onClose }: TenderModalProps) {
                   className="w-full rounded-sm border border-border/60 bg-secondary/20 py-2.5 px-3 text-xs text-foreground focus:border-gold/60 focus:outline-none focus:ring-1 focus:ring-gold/40 cursor-pointer"
                 >
                   <option className="bg-card">Immediate (&lt; 30 days)</option>
-                  <option className="bg-card">Mid-Term Budget Loop (1 - 3 Months)</option>
-                  <option className="bg-card">Long-Term Infrastructure Project</option>
+                  <option className="bg-card">Standard QTR Block (30-90 days)</option>
+                  <option className="bg-card">Long Term Project Phase Layout</option>
                 </select>
               </div>
             </div>
